@@ -1,8 +1,14 @@
 export default async function handler(req, res) {
+  const token = process.env.APIMO_TOKEN;
+
+  if (!token) {
+    return res.status(500).json({ error: "Missing APIMO_TOKEN env variable" });
+  }
+
   try {
     const response = await fetch("https://api.apimo.pro/agencies/2188/properties", {
       headers: {
-        Authorization: "Bearer 21217b006c066cd3800e5d44da62ad22f5c5a74a",
+        Authorization: `Bearer ${token}`,
       },
     });
 
